@@ -10,6 +10,8 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 from rest_framework_simplejwt.tokens import AccessToken
+from rest_framework_simplejwt.exceptions import InvalidToken
+from rest_framework import status
 
 from .models import Note
 from .serializers import (
@@ -53,23 +55,47 @@ class CustomTokenObtainPairView(TokenObtainPairView):
 
             return res
         except:
-            return Response(status=404)
+            return Response()
 
 
 class CustomRefreshTokenView(TokenRefreshView):
     def post(self, request, *args, **kwargs):
         try:
-            resfresh_token = request.COOKIES.get("refresh_token", None)
-            request.data["refresh"] = resfresh_token
-            print(request.user)
+            refresh_token = request.COOKIES.get("refresh_token")
+            if not refresh_token:
+                return Response(
+                    {"detail": "Refresh token is missing."},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            request.data["refresh"] = refresh_token
             response = super().post(request, *args, **kwargs)
             tokens = response.data
             access_token = tokens["access"]
+            access_token_info = AccessToken(access_token)
+            res = Response(
+                {
+                    "access_token": access_token,
+                    "user": {
+                        "username": access_token_info["username"],
+                        "email": access_token_info["email"],
+                    },
+                },
+                status=200,
+            )
 
-            res = Response({"access": access_token}, status=200)
             return res
-        except:
-            return Response(status=404)
+        except InvalidToken as e:
+            return Response(
+                {"detail": "Invalid refresh token."},
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
+
+        except Exception as e:
+            return Response(
+                {"detail": f"An unexpected error occurred: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
 
 
 @api_view(["POST"])

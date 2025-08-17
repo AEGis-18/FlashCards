@@ -6,7 +6,7 @@ class CookiesJWTAuthentication(JWTAuthentication):
         bearer = request.headers.get("Authorization")
         # if not bearer:
         #    return None
-
+        
         access_token = bearer.split(" ")[1]
 
         if not access_token:

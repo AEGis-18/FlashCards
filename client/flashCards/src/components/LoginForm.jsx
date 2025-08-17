@@ -3,15 +3,28 @@ import { TextInput } from "./formElements/TextInput";
 import { Label } from "./formElements/Label";
 import { Button } from "./formElements/Button";
 import { PasswordInput } from "./formElements/PasswordInput";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { login } from "../api/tokens.api";
+import { useLocation, useNavigate } from "react-router";
 
 export default function LoginForm() {
-  const [formData, setFormData] = useState({ user: "", password: "" });
+  const [formData, setFormData] = useState({ username: "", password: "" });
 
-  function handleSubmit(e) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  const handleLogin = async (e) => {
     e.preventDefault();
     console.log(formData);
-  }
+    try {
+      const response = await login(formData.username, formData.password);
+
+      navigate(from, { replace: true });
+    } catch (error) {
+      console.log("Login error: ", error);
+    }
+  };
 
   function handleChange(e) {
     const { id, value } = e.target;
@@ -20,10 +33,14 @@ export default function LoginForm() {
 
   return (
     <>
-      <DefaultForm id="login" onSubmit={handleSubmit}>
+      <DefaultForm id="login" onSubmit={handleLogin}>
         <h1>Login</h1>
-        <Label for="user">Username</Label>
-        <TextInput id="user" value={formData.user} onChange={handleChange} />
+        <Label for="username">Username</Label>
+        <TextInput
+          id="username"
+          value={formData.username}
+          onChange={handleChange}
+        />
         <Label for="password">Password</Label>
         <PasswordInput
           id="password"

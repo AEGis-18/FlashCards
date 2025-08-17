@@ -2,7 +2,7 @@ import { twMerge } from "tailwind-merge";
 import { cva } from "class-variance-authority";
 
 const labelVariants = cva(
-  "px-3 py-1 border rounded-md text-white mt-2 mb-1 font-semibold",
+  "px-3 py-1 border rounded-md text-white mt-2 mb-1 font-semibold cursor-pointer",
   {
     variants: {
       variant: {
@@ -26,7 +26,10 @@ const labelVariants = cva(
 export function Button({ className, variant, size, children, ...props }) {
   return (
     <>
-      <button className={twMerge(labelVariants({ variant, className, size }))}>
+      <button
+        {...props}
+        className={twMerge(labelVariants({ variant, className, size }))}
+      >
         {children}
       </button>
     </>
