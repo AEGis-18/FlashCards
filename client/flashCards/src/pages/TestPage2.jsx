@@ -1,31 +1,32 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../components/formElements/Button";
 import { useEffect, useState } from "react";
+import { Api } from "../api/base.api";
 
 export function TestPage2() {
   const [notes, setNotes] = useState([]);
-  // useEffect(() => {
-  //   const fetchNotes = async () => {
-  //     try {
-  //       const res = await api.get("/notes");
-  //       console.log(res.data);
-  //       setNotes(res.data);
-  //     } catch (error) {
-  //       console.log("Notes error: ", error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchNotes = async () => {
+      try {
+        const res = await Api.get("/notes");
+        console.log(res.data);
+        setNotes(res.data);
+      } catch (error) {
+        console.log("Notes error: ", error);
+      }
+    };
 
-  //   fetchNotes();
-  // }, []);
+    fetchNotes();
+  }, []);
 
   return (
     <div>
       <h2>Notes</h2>
-      {/* <ul>
+      <ul>
         {notes.map((note) => (
           <li key={note.id}>{note.description}</li>
         ))}
-      </ul> */}
+      </ul>
       <Link to="/">
         <Button>Notes</Button>
       </Link>

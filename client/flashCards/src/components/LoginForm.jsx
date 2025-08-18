@@ -6,9 +6,12 @@ import { PasswordInput } from "./formElements/PasswordInput";
 import { useContext, useState } from "react";
 import { login } from "../api/tokens.api";
 import { useLocation, useNavigate } from "react-router";
+import { useAuth } from "./AuthProvider";
 
 export default function LoginForm() {
   const [formData, setFormData] = useState({ username: "", password: "" });
+
+  const { setAuth } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -19,7 +22,12 @@ export default function LoginForm() {
     console.log(formData);
     try {
       const response = await login(formData.username, formData.password);
-
+      console.log("Login: ", response.data);
+      setAuth({
+        accessToken: response.data.access_token,
+        username: response.data.user.username,
+        email: response.data.user.email,
+      });
       navigate(from, { replace: true });
     } catch (error) {
       console.log("Login error: ", error);
