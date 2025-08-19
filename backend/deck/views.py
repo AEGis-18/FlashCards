@@ -18,7 +18,16 @@ class DeckView(viewsets.ModelViewSet):
 @permission_classes([AllowAny])
 class CardView(viewsets.ModelViewSet):
     serializer_class = CardSerializer
-    queryset = Card.objects.all()
+
+    def get_queryset(self):
+        queryset = Card.objects.all()
+        deck=self.request.query_params.get('deck')
+
+        if deck:
+            queryset=queryset.filter(deck=deck)
+
+        return queryset
+
 
 
 @authentication_classes([])
