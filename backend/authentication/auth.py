@@ -4,9 +4,9 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 class CookiesJWTAuthentication(JWTAuthentication):
     def authenticate(self, request):
         bearer = request.headers.get("Authorization")
-        # if not bearer:
-        #    return None
-        
+        if not bearer:
+            raise Exception("Authorization missing")
+
         access_token = bearer.split(" ")[1]
 
         if not access_token:
