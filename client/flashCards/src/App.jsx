@@ -34,16 +34,7 @@ function App() {
             path="/decks"
             element={
               <ProtectedRoute>
-                <DecksPage>
-                  <Route
-                    path="/:id"
-                    element={
-                      <ProtectedRoute>
-                        <DeckDetail />
-                      </ProtectedRoute>
-                    }
-                  />
-                </DecksPage>
+                <DecksPage />
               </ProtectedRoute>
             }
           />
