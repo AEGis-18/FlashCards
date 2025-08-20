@@ -14,6 +14,8 @@ export function TestPage() {
         <p>{auth.username}</p>
         <p>{auth.email}</p>
         <Button onClick={() => navigate("/notes")}>Notes</Button>
+        <br></br>
+        <Button onClick={() => navigate("/decks")}>Decks</Button>
       </Box>
     </>
   );

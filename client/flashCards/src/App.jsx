@@ -1,6 +1,8 @@
 import "./App.css";
 import { AuthProvider } from "./components/AuthProvider";
+import DeckDetail from "./components/Decks/DeckDetail";
 import ProtectedRoute from "./components/ProtectedRoute";
+import DecksPage from "./pages/DecksPage";
 import { LoginPage } from "./pages/LoginPage";
 import { TestPage } from "./pages/TestPage";
 import { TestPage2 } from "./pages/TestPage2";
@@ -25,6 +27,31 @@ function App() {
             element={
               <ProtectedRoute>
                 <TestPage2 />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/decks"
+            element={
+              <ProtectedRoute>
+                <DecksPage>
+                  <Route
+                    path="/:id"
+                    element={
+                      <ProtectedRoute>
+                        <DeckDetail />
+                      </ProtectedRoute>
+                    }
+                  />
+                </DecksPage>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/decks/:id"
+            element={
+              <ProtectedRoute>
+                <DeckDetail />
               </ProtectedRoute>
             }
           />
