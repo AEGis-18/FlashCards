@@ -102,7 +102,7 @@ class CustomRefreshTokenView(TokenRefreshView):
 
 
 @api_view(["POST"])
-def logout(request):
+def signout(request):
     try:
         res = Response()
         res.data = {"success": True}
@@ -110,7 +110,7 @@ def logout(request):
 
         return res
     except:
-        return Response({"success": False})
+        return Response({"success": False},status=500)
 
 
 @api_view(["POST"])
