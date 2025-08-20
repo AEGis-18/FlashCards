@@ -5,6 +5,11 @@ import { Api } from "../api/base.api";
 
 export function TestPage2() {
   const [notes, setNotes] = useState([]);
+
+  useEffect(() => {
+    document.title = "Test 2 - Flash Cards";
+  }, []);
+
   useEffect(() => {
     const fetchNotes = async () => {
       try {

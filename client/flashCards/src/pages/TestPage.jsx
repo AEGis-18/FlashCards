@@ -2,11 +2,16 @@ import { Box } from "../components/formElements/Box";
 import { Button } from "../components/formElements/Button";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../components/AuthProvider";
+import { useEffect } from "react";
 
 export function TestPage() {
   const navigate = useNavigate();
   const { auth } = useAuth();
-  console.log("/ page", auth);
+
+  useEffect(() => {
+    document.title = "Test 1 - Flash Cards";
+  }, []);
+
   return (
     <>
       <Box>

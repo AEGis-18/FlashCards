@@ -1,7 +1,8 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "./AuthProvider";
+import NavBar from "./NavBar";
 
-export default function ProtectedRoute({ children }) {
+export default function ProtectedRoute({ navBar = true, children }) {
   const { auth, loading } = useAuth();
 
   if (loading) {
@@ -12,5 +13,10 @@ export default function ProtectedRoute({ children }) {
     return <Navigate to="/login" />;
   }
 
-  return children;
+  return (
+    <>
+      {navBar && <NavBar />}
+      {children}
+    </>
+  );
 }
