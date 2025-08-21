@@ -23,7 +23,7 @@ export default function Decks() {
 
   return (
     <>
-      <ul>
+      <ul className="flex space-x-8 text-center">
         {decks.map((deck) => {
           return (
             <li key={deck.id}>

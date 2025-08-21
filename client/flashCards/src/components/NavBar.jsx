@@ -15,7 +15,7 @@ export default function NavBar() {
   }*/
 
   return (
-    <nav className="bg-blue-400 h-16 mb-2">
+    <nav className="bg-blue-400 h-16 mb-2 w-full">
       <ul className="flex items-center h-full space-x-4 px-4">
         <li className="border-r border-white h-full pr-4 flex items-center">
           <Link to="/" className="text-white">

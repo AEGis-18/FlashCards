@@ -3,6 +3,7 @@ import { AuthProvider } from "./components/AuthProvider";
 import DeckDetail from "./components/Decks/DeckDetail";
 import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { CreateDeckPage } from "./pages/CreateDeckPage";
 import DecksPage from "./pages/DecksPage";
 import { LoginPage } from "./pages/LoginPage";
 import { TestPage } from "./pages/TestPage";
@@ -45,6 +46,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <DeckDetail />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/decks/create"
+            element={
+              <ProtectedRoute>
+                <CreateDeckPage />
               </ProtectedRoute>
             }
           />

@@ -7,6 +7,7 @@ import { useContext, useState } from "react";
 import { login } from "../api/tokens.api";
 import { useLocation, useNavigate } from "react-router";
 import { useAuth } from "./AuthProvider";
+import { FormTitle } from "./formElements/FormTitle";
 
 export default function LoginForm() {
   const [formData, setFormData] = useState({ username: "", password: "" });
@@ -42,7 +43,7 @@ export default function LoginForm() {
   return (
     <>
       <DefaultForm id="login" onSubmit={handleLogin}>
-        <h1>Login</h1>
+        <FormTitle>Login form</FormTitle>
         <Label for="username">Username</Label>
         <TextInput
           id="username"
