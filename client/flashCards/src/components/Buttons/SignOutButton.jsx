@@ -1,9 +1,9 @@
-import { signOut } from "../api/tokens.api";
-import { useAuth } from "./AuthProvider";
-import { Button } from "./formElements/Button";
+import { signOut } from "../../api/tokens.api";
+import { useAuth } from "../AuthProvider";
+import { Button } from "../formElements/Button";
 import { useNavigate } from "react-router-dom";
 
-export default function SignOutButton({ size }) {
+export function SignOutButton({ size }) {
   const { setAuth } = useAuth();
   const navigate = useNavigate();
 

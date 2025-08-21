@@ -1,7 +1,7 @@
 import { Link, Navigate } from "react-router-dom";
-import SignOutButton from "./SignOutButton";
+import { SignOutButton } from "./Buttons/SignOutButton";
 import { useAuth } from "./AuthProvider";
-import LogInButton from "./LogInButton";
+import { LogInButton } from "./Buttons/LogInButton";
 
 export default function NavBar() {
   const { auth, loading } = useAuth();

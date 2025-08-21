@@ -1,8 +1,8 @@
-import { useAuth } from "./AuthProvider";
-import { Button } from "./formElements/Button";
+import { useAuth } from "../AuthProvider";
+import { Button } from "../formElements/Button";
 import { useNavigate } from "react-router-dom";
 
-export default function LogInButton({ size }) {
+export function LogInButton({ size }) {
   const { setAuth } = useAuth();
   const navigate = useNavigate();
 
