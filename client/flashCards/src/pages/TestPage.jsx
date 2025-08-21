@@ -1,5 +1,6 @@
 import { Box } from "../components/formElements/Box";
 import { Button } from "../components/formElements/Button";
+import { FormTitle } from "../components/formElements/FormTitle";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../components/AuthProvider";
 import { useEffect } from "react";
@@ -15,7 +16,7 @@ export function TestPage() {
   return (
     <>
       <Box>
-        <h1>Prueba</h1>
+        <FormTitle>Prueba</FormTitle>
         {auth ? (
           <>
             <p>{auth.username}</p>
