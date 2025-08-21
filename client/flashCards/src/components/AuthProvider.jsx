@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
           {},
           { withCredentials: true }
         );
-        console.log("fetch", response.data);
+        //console.log("fetch", response.data);
         setAuth({
           accessToken: response.data.access_token,
           username: response.data.user.username,

@@ -10,7 +10,7 @@ export default function Decks() {
     const fetchDeck = async () => {
       try {
         const res = await getDecks();
-        console.log(res.data);
+        // console.log(res.data);
         setDecks(res.data);
       } catch (error) {
         console.log(error);
