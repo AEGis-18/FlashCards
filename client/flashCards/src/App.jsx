@@ -1,6 +1,7 @@
 import "./App.css";
 import { AuthProvider } from "./components/AuthProvider";
 import DeckDetail from "./components/Decks/DeckDetail";
+import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import DecksPage from "./pages/DecksPage";
 import { LoginPage } from "./pages/LoginPage";
@@ -17,9 +18,10 @@ function App() {
           <Route
             path="/"
             element={
-              <ProtectedRoute>
+              <>
+                <NavBar />
                 <TestPage />
-              </ProtectedRoute>
+              </>
             }
           />
           <Route

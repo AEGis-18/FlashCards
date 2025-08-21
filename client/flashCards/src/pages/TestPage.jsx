@@ -16,8 +16,15 @@ export function TestPage() {
     <>
       <Box>
         <h1>Prueba</h1>
-        <p>{auth.username}</p>
-        <p>{auth.email}</p>
+        {auth ? (
+          <>
+            <p>{auth.username}</p>
+            <p>{auth.email}</p>
+          </>
+        ) : (
+          <p>Login to see info</p>
+        )}
+
         <Button onClick={() => navigate("/notes")}>Notes</Button>
         <br></br>
         <Button onClick={() => navigate("/decks")}>Decks</Button>
