@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getDecks } from "../../api/deck.api";
-import DeckBox from "./DeckBox";
+import { DeckBox } from "./DeckBox";
 
 export default function Decks() {
   const [decks, setDecks] = useState([]);

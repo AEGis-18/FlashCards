@@ -1,41 +1,37 @@
-import { useEffect, useState } from "react";
+import { ErrorMessage } from "../ErrorMessage";
+import { useState } from "react";
 import { DefaultForm } from "../DefaultForm";
 import { FormTitle } from "../formElements/FormTitle";
 import { Label } from "../formElements/Label";
 import { Button } from "../formElements/Button";
 import { TextInput } from "../formElements/TextInput";
-import { useLocation, useNavigate } from "react-router";
-import { postDecks } from "../../api/deck.api";
-import { useAuth } from "../AuthProvider";
+import { useNavigate } from "react-router";
+import { postCard } from "../../api/card.api";
 
-export function DeckForm() {
+export function CardForm({ deckId, triggerRefresh }) {
+  if (!deckId) {
+    return <ErrorMessage>No deck provided</ErrorMessage>;
+  }
+
   const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    creator: "",
+    front: "",
+    back: "",
+    deckId: deckId,
   });
 
-  const { auth } = useAuth();
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (auth) {
-      setFormData((prev) => ({ ...prev, creator: auth.username }));
-    }
-  }, [auth]);
+  //const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
     try {
-      const res = await postDecks(
-        formData.title,
-        formData.description,
-        formData.creator
+      const res = await postCard(
+        formData.front,
+        formData.back,
+        formData.deckId
       );
-
-      navigate("/decks");
+      triggerRefresh();
+      // navigate("/decks");
     } catch (error) {
       console.log(error);
     }
@@ -48,35 +44,35 @@ export function DeckForm() {
 
   return (
     <>
-      <DefaultForm id="create-deck" onSubmit={handleSubmit}>
+      <DefaultForm id="create-card" onSubmit={handleSubmit}>
         <FormTitle className="mb-3">Create deck</FormTitle>
         <div className="flex items-baseline space-x-18 w-full mb-2">
-          <Label for="title" size="small" className="w-auto">
-            Title:
+          <Label for="front" size="small" className="w-auto">
+            Front:
           </Label>
           <TextInput
-            id="title"
-            value={formData.title}
+            id="front"
+            value={formData.front}
             onChange={handleChange}
             size="small"
             className=" w-full"
           />
         </div>
         <div className="flex items-baseline space-x-2 w-full mb-2">
-          <Label for="description" size="small" className=" w-auto">
-            Description:
+          <Label for="back" size="small" className=" w-auto">
+            Back:
           </Label>
           <TextInput
-            id="description"
-            value={formData.description}
+            id="back"
+            value={formData.back}
             onChange={handleChange}
             size="small"
             className="w-full"
           />
         </div>
         <div className="flex justify-center mt-4">
-          <Button variant={"accept"} form="create-deck" type="submit">
-            Create
+          <Button variant={"accept"} form="create-card" type="submit">
+            Add
           </Button>
         </div>
       </DefaultForm>

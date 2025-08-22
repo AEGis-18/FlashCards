@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { getCardsFrom } from "../../api/card.api";
-import Card from "./Card";
+import { Card } from "./Card";
 
-export default function CardsList({ deckId }) {
+export function CardsList({ deckId, refresh }) {
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -20,7 +20,7 @@ export default function CardsList({ deckId }) {
       }
     };
     fetchCards();
-  }, []);
+  }, [deckId, refresh]);
 
   return (
     <>
