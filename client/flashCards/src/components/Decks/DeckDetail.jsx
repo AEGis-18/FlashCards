@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { refresh } from "../../api/tokens.api";
 import { CreateCardButton } from "../Buttons/CreateCardButton";
 import { CardsList } from "../Cards/CardsList";
 import { useLocation } from "react-router-dom";

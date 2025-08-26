@@ -1,36 +1,52 @@
 import { ErrorMessage } from "../ErrorMessage";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DefaultForm } from "../DefaultForm";
 import { FormTitle } from "../formElements/FormTitle";
 import { Label } from "../formElements/Label";
 import { Button } from "../formElements/Button";
 import { TextInput } from "../formElements/TextInput";
-import { useNavigate } from "react-router";
-import { postCard } from "../../api/card.api";
+import { postCard, updateCard } from "../../api/card.api";
 
-export function CardForm({ deckId, triggerRefresh }) {
+export function CardForm({ deckId, triggerRefresh, initialCard, onUpdate }) {
   if (!deckId) {
     return <ErrorMessage>No deck provided</ErrorMessage>;
   }
 
   const [formData, setFormData] = useState({
-    front: "",
-    back: "",
+    front: initialCard?.front || "",
+    back: initialCard?.back || "",
     deckId: deckId,
   });
 
   //const navigate = useNavigate();
+  useEffect(() => {
+    if (initialCard) {
+      setFormData({
+        front: initialCard.front,
+        back: initialCard.back,
+        deckId: deckId,
+      });
+    }
+  }, [initialCard, deckId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
     try {
-      const res = await postCard(
-        formData.front,
-        formData.back,
-        formData.deckId
-      );
-      triggerRefresh();
+      let res;
+      if (initialCard) {
+        console.log("b");
+        res = await updateCard(initialCard.id, formData.front, formData.back);
+        onUpdate(res.data);
+      } else {
+        res = await postCard(formData.front, formData.back, formData.deckId);
+        triggerRefresh();
+        setFormData({
+          front: "",
+          back: "",
+          deckId: deckId,
+        });
+      }
       // navigate("/decks");
     } catch (error) {
       console.log(error);

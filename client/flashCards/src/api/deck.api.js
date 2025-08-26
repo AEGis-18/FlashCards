@@ -13,3 +13,7 @@ export function postDecks(title, description, creator) {
     creator: creator,
   });
 }
+
+export function deleteDeck(id) {
+  return Api.delete(`${DECK_URL}${id}/`);
+}
