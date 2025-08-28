@@ -6,7 +6,7 @@ export function CreateDeckButton() {
 
   function handleClick(e) {
     e.preventDefault();
-    return navigate("/decks/create");
+    return navigate("/my-decks/create");
   }
   return (
     <Button variant={"accept"} onClick={handleClick}>

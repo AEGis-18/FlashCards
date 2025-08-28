@@ -28,7 +28,7 @@ export function TestPage() {
 
         <Button onClick={() => navigate("/notes")}>Notes</Button>
         <br></br>
-        <Button onClick={() => navigate("/decks")}>Decks</Button>
+        <Button onClick={() => navigate("/my-decks")}> My Decks</Button>
       </Box>
     </>
   );

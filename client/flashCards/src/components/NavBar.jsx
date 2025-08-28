@@ -22,15 +22,22 @@ export default function NavBar() {
             Home
           </Link>
         </li>
-        <li className="border-r border-white h-full pr-4 flex items-center">
-          <Link to="/decks" className="text-white">
-            Decks
+        {/* <li className="border-r border-white h-full pr-4 flex items-center">
+          <Link to="/public-decks" className="text-white">
+            Public Decks
           </Link>
-        </li>
+        </li> */}
         {auth ? (
-          <li className="ml-auto">
-            <SignOutButton size="small" />
-          </li>
+          <>
+            <li className="border-r border-white h-full pr-4 flex items-center">
+              <Link to="/my-decks" className="text-white">
+                My Decks
+              </Link>
+            </li>
+            <li className="ml-auto">
+              <SignOutButton size="small" />
+            </li>
+          </>
         ) : (
           <li className="ml-auto">
             <LogInButton size="small" />

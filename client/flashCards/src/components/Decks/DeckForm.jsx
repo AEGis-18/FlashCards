@@ -35,7 +35,7 @@ export function DeckForm() {
         formData.creator
       );
 
-      navigate("/decks");
+      navigate("/my-decks");
     } catch (error) {
       console.log(error);
     }

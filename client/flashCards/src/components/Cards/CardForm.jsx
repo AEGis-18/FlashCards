@@ -35,7 +35,6 @@ export function CardForm({ deckId, triggerRefresh, initialCard, onUpdate }) {
     try {
       let res;
       if (initialCard) {
-        console.log("b");
         res = await updateCard(initialCard.id, formData.front, formData.back);
         onUpdate(res.data);
       } else {
@@ -47,7 +46,7 @@ export function CardForm({ deckId, triggerRefresh, initialCard, onUpdate }) {
           deckId: deckId,
         });
       }
-      // navigate("/decks");
+      // navigate("/my-decks");
     } catch (error) {
       console.log(error);
     }

@@ -4,8 +4,9 @@ import DeckDetail from "./components/Decks/DeckDetail";
 import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { CreateDeckPage } from "./pages/CreateDeckPage";
-import DecksPage from "./pages/DecksPage";
 import { LoginPage } from "./pages/LoginPage";
+import { MyDecksPage } from "./pages/MyDecksPage";
+import { PublicDecksPage } from "./pages/PublicDecksPage";
 import { TestPage } from "./pages/TestPage";
 import { TestPage2 } from "./pages/TestPage2";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -16,6 +17,18 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
+          {/*
+          <Route
+            path="/public-decks"
+            element={
+              <>
+              <NavBar/>
+                <PublicDecksPage />
+                </>
+            }
+          />
+
+         */}
           <Route
             path="/"
             element={
@@ -34,15 +47,15 @@ function App() {
             }
           />
           <Route
-            path="/decks"
+            path="/my-decks"
             element={
               <ProtectedRoute>
-                <DecksPage />
+                <MyDecksPage />
               </ProtectedRoute>
             }
           />
           <Route
-            path="/decks/:id"
+            path="/my-decks/:id"
             element={
               <ProtectedRoute>
                 <DeckDetail />
@@ -50,7 +63,7 @@ function App() {
             }
           />
           <Route
-            path="/decks/create"
+            path="/my-decks/create"
             element={
               <ProtectedRoute>
                 <CreateDeckPage />

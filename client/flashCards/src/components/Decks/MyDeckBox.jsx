@@ -4,13 +4,13 @@ import { Button } from "../formElements/Button";
 import { useNavigate } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 
-export function DeckBox({ deck, deckId, onDelete }) {
+export function MyDeckBox({ deck, deckId, onDelete }) {
   const navigate = useNavigate();
 
   function handleButton(e) {
     e.preventDefault();
     console.log("deckbox id: ", deck.id);
-    return navigate(`/decks/${deck.id}`, { state: { deckId } });
+    return navigate(`/my-decks/${deck.id}`, { state: { deckId } });
   }
 
   return (

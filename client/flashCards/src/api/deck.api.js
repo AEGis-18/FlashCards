@@ -6,6 +6,10 @@ export function getDecks() {
   return Api.get(DECK_URL);
 }
 
+export function getUserDecks() {
+  return Api.get("user-deck/",{params:{forUser:"true",}});
+}
+
 export function postDecks(title, description, creator) {
   return Api.post(DECK_URL, {
     title: title,

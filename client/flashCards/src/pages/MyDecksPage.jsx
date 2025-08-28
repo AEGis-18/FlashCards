@@ -1,9 +1,9 @@
-import Decks from "../components/Decks/Decks";
 import { CreateDeckButton } from "../components/Buttons/CreateDeckButton";
 import { useEffect } from "react";
 import { Box } from "../components/formElements/Box";
+import { MyDecks } from "../components/Decks/MyDecks";
 
-export default function DecksPage() {
+export function MyDecksPage() {
   useEffect(() => {
     document.title = "Decks - Flash Cards";
   }, []);
@@ -12,7 +12,7 @@ export default function DecksPage() {
     <>
       <CreateDeckButton />
       <Box className="m-4">
-        <Decks />
+        <MyDecks />
       </Box>
     </>
   );
