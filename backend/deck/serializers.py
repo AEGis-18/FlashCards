@@ -5,13 +5,13 @@ from .models import Deck, Card, UserDeck
 class DeckSerializer(serializers.ModelSerializer):
     class Meta:
         model = Deck
-        fields = "__all__"
+        fields = ["id", "title", "description", "creator"]
 
 
 class CardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Card
-        fields = ["id","front", "back", "deck"]
+        fields = ["id", "front", "back", "deck"]
 
 
 class UserDeckSerializer(serializers.ModelSerializer):

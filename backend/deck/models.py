@@ -20,5 +20,5 @@ class UserDeck(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     deck = models.ForeignKey(Deck, on_delete=models.CASCADE)
     # TODO max>min
-    max_cards = models.PositiveIntegerField()
-    min_cards = models.PositiveIntegerField()
+    max_cards = models.PositiveIntegerField(default=50)
+    min_cards = models.PositiveIntegerField(default=0)
