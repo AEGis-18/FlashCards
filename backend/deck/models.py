@@ -22,3 +22,6 @@ class UserDeck(models.Model):
     # TODO max>min
     max_cards = models.PositiveIntegerField(default=50)
     min_cards = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        unique_together=("user","deck")
