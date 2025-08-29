@@ -14,6 +14,7 @@ const labelVariants = cva(
         default: "text-2xl",
         big: "text-3xl",
         small: "text-xl",
+        very_small: "text-xs",
       },
     },
     defaultVariants: {
