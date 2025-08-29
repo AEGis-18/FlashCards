@@ -4,6 +4,7 @@ import DeckDetail from "./components/Decks/DeckDetail";
 import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { CreateDeckPage } from "./pages/CreateDeckPage";
+import { FlashCardsPage } from "./pages/FlashCardsPage";
 import { LoginPage } from "./pages/LoginPage";
 import { MyDecksPage } from "./pages/MyDecksPage";
 import { PublicDecksPage } from "./pages/PublicDecksPage";
@@ -67,6 +68,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <CreateDeckPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/flash-cards"
+            element={
+              <ProtectedRoute>
+                <FlashCardsPage />
               </ProtectedRoute>
             }
           />
