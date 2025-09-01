@@ -56,9 +56,19 @@ export default function LoginForm() {
           value={formData.password}
           onChange={handleChange}
         />
-        <Button variant={"accept"} form="login" type="submit">
-          Login
-        </Button>
+        <div className="flex justify-end m-1">
+          <p
+            onClick={() => navigate("/signup")}
+            className="text-blue-500 cursor-pointer"
+          >
+            Don't have an account? Sign up
+          </p>
+        </div>
+        <div className="flex justify-center">
+          <Button variant={"accept"} form="login" type="submit">
+            Login
+          </Button>
+        </div>
       </DefaultForm>
     </>
   );
