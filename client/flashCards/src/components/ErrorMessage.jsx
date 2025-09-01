@@ -20,14 +20,29 @@ const labelVariants = cva("text-red-500", {
 });
 
 export function ErrorMessage({ className, variant, size, children, ...props }) {
+  if (Array.isArray(children)) {
+    return (
+      <>
+        {children.map((error, index) => (
+          <p
+            key={index}
+            {...props}
+            className={twMerge(labelVariants({ variant, className, size }))}
+          >
+            {error}
+          </p>
+        ))}
+      </>
+    );
+  }
+
   return (
-    <>
-      <button
-        {...props}
-        className={twMerge(labelVariants({ variant, className, size }))}
-      >
-        {children}
-      </button>
-    </>
+    <p
+      {...props}
+      className={twMerge(labelVariants({ variant, className, size }))}
+    >
+      {children}
+    </p>
   );
+
 }

@@ -33,7 +33,7 @@ export function PasswordInput({
   onChange,
   ...props
 }) {
-  const [password, setPassword] = useState("");
+  // const [password, setPassword] = useState("");
   const [showing, setShowing] = useState(false);
 
   return (
@@ -42,11 +42,12 @@ export function PasswordInput({
         type={showing ? "text" : "password"}
         id={id}
         value={value}
-        name="password"
+        name={id}
         onChange={onChange}
         placeholder="Enter your password"
         required
         className="w-full pl-2 py-1 border rounded-l-md border-white"
+        {...props}
       />
       <button
         onClick={(e) => {

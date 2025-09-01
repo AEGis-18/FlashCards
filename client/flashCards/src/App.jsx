@@ -8,6 +8,7 @@ import { FlashCardsPage } from "./pages/FlashCardsPage";
 import { LoginPage } from "./pages/LoginPage";
 import { MyDecksPage } from "./pages/MyDecksPage";
 import { PublicDecksPage } from "./pages/PublicDecksPage";
+import { SignUpPage } from "./pages/SignUpPage";
 import { TestPage } from "./pages/TestPage";
 import { TestPage2 } from "./pages/TestPage2";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -18,6 +19,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
           {/*
           <Route
             path="/public-decks"
