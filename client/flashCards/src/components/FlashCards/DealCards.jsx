@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { getFlashCards, returnFlashCards } from "../api/card.api";
+import { getFlashCards, returnFlashCards } from "../../api/card.api";
 import { DisplayFlashCard } from "./DisplayFlashCard";
 import { useNavigate } from "react-router-dom";
 
-//TODO delete deckId=1
-export function DealCards({ deckId = 1 }) {
+export function DealCards({ deckId }) {
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentCard, setCurrentCard] = useState(0);

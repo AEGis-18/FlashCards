@@ -5,12 +5,12 @@ import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { CreateDeckPage } from "./pages/CreateDeckPage";
 import { FlashCardsPage } from "./pages/FlashCardsPage";
+import { FlashDecksPage } from "./pages/FlashDecksPage";
 import { LoginPage } from "./pages/LoginPage";
 import { MyDecksPage } from "./pages/MyDecksPage";
 import { PublicDecksPage } from "./pages/PublicDecksPage";
 import { SignUpPage } from "./pages/SignUpPage";
-import { TestPage } from "./pages/TestPage";
-import { TestPage2 } from "./pages/TestPage2";
+import { HomePage } from "./pages/HomePage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -37,16 +37,8 @@ function App() {
             element={
               <>
                 <NavBar />
-                <TestPage />
+                <HomePage />
               </>
-            }
-          />
-          <Route
-            path="/notes"
-            element={
-              <ProtectedRoute>
-                <TestPage2 />
-              </ProtectedRoute>
             }
           />
           <Route
@@ -75,6 +67,14 @@ function App() {
           />
           <Route
             path="/flash-cards"
+            element={
+              <ProtectedRoute>
+                <FlashDecksPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/flash-cards/:id"
             element={
               <ProtectedRoute>
                 <FlashCardsPage />

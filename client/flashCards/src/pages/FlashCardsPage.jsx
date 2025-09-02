@@ -1,10 +1,11 @@
-import { DealCards } from "../components/DealCards";
+import { useParams } from "react-router-dom";
+import { DealCards } from "../components/FlashCards/DealCards";
 
 export function FlashCardsPage() {
+  const { id } = useParams();
   return (
     <>
-      <div>FlashCardsPage</div>
-      <DealCards deckId={1}></DealCards>
+      <DealCards deckId={id} />
     </>
   );
 }

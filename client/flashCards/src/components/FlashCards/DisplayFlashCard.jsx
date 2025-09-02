@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Box } from "./formElements/Box";
-import { Button } from "./formElements/Button";
+import { Box } from "../formElements/Box";
+import { Button } from "../formElements/Button";
 
 export function DisplayFlashCard({ card, handleClick }) {
   const [isfrontSide, setIsFrontSide] = useState(true);
