@@ -1,25 +1,13 @@
-from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework.decorators import permission_classes, authentication_classes, action
+from rest_framework.decorators import permission_classes, authentication_classes
 from .models import Deck, Card, UserDeck
 from .serializers import DeckSerializer, CardSerializer, UserDeckSerializer
 from rest_framework.decorators import api_view
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.db.models.signals import post_save
 from rest_framework import status
-
-
-def get_user_deck(deck, user):
-    try:
-        user_deck = UserDeck.objects.get(deck=deck, user=user)
-    except UserDeck.DoesNotExist:
-        return Response(
-            {"error": "User does not have access to this deck."}, status=404
-        )
-
-    return UserDeckSerializer(user_deck).data
+from .utils import deal_cards, get_user_deck
 
 
 # Create your views here.
@@ -86,7 +74,8 @@ def get_flash_cards(request):
     if not request_deck:
         return Response({"error": "Deck parameter is required."}, status=400)
 
-    cards = Card.objects.filter(deck=request_deck).order_by("-value")
+    cards = Card.objects.filter(deck=request_deck).order_by("-value", "?")
+
     card_serializer = CardSerializer(cards, many=True)
 
     request_user = request.user.id
@@ -97,26 +86,31 @@ def get_flash_cards(request):
     max_cards = user_deck["max_cards"]
     min_cards = user_deck["min_cards"]
 
-    final_cards = deal_cards(card_serializer.data, 5, min_cards)
+    # TODO: change to max_cards
+    final_cards = deal_cards(card_serializer.data, 8, min_cards)
 
     return Response(final_cards, status=status.HTTP_200_OK)
-
-
-def deal_cards(full_pack, max_cards, min_cards):
-    i = 0
-    new_pack = []
-
-    while len(new_pack) < min_cards or len(new_pack) < max_cards:
-        if i >= len(full_pack):
-            break
-        new_pack.append(full_pack[i])
-        i += 1
-
-    return new_pack
 
 
 @api_view(["POST"])
 # @authentication_classes([])
 @permission_classes([IsAuthenticated])
 def return_flash_cards(request):
-    pass
+
+    cards = request.data.get("cards", [])
+    updated_cards = []
+
+    for card_data in cards:
+        try:
+            card = Card.objects.get(id=card_data["id"])
+            card.value = card_data["value"]
+            updated_cards.append(card)
+
+        except Card.DoesNotExist:
+            return Response(
+                {"error": f'Card with id {card_data["id"]} does not exist'},
+                status=status.HTTP_404_NOT_FOUND,
+            )
+
+    Card.objects.bulk_update(updated_cards, ["value"])
+    return Response({"message": "Cards received"}, status=status.HTTP_200_OK)

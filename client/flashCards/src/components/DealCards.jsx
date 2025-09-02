@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getFlashCards } from "../api/card.api";
+import { getFlashCards, returnFlashCards } from "../api/card.api";
 import { DisplayFlashCard } from "./DisplayFlashCard";
 import { useNavigate } from "react-router-dom";
 
@@ -9,6 +9,7 @@ export function DealCards({ deckId = 1 }) {
   const [loading, setLoading] = useState(true);
   const [currentCard, setCurrentCard] = useState(0);
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchDeck = async () => {
       try {
@@ -56,7 +57,23 @@ export function DealCards({ deckId = 1 }) {
     } else {
       console.log("end");
       console.log(cards);
+      endFlashCards(cards);
     }
+  }
+
+  const endFlashCards = async (cards) => {
+    try {
+      const res = await returnFlashCards(cards);
+      if (res.status === 200) {
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (loading) {
+    return <h1>Loading...</h1>;
   }
 
   return (
